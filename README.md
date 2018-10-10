@@ -7,7 +7,7 @@ This bot is mainly written for research the use of automated tools in real world
 ***DISCLAIMER***
 
 
-This bot is a tool for the people who wants to stay active or become popular on instagram
+This computer vision based bot is a tool for the people who wants to stay active or become popular on instagram
 but don't have enough time to give many likes and comments by their own.
 
 This bot is completely configurable , specific tags , specific comments , how many likes and comments for tag.
