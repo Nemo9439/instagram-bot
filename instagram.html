@@ -1,0 +1,209 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>instagram.sikuli</h2> <a href="instagram.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> random
+
+INSTAGRAM_MAX_LIMIT_PER_HOUR=<span class="dig">400</span>
+
+NUMBER_OF_CYCLES=<span class="dig">2</span>
+NUMBER_OF_PICTURES_TO_LIKE_PER_TAG=<span class="dig">5</span>
+
+TAGS_GENERAL=[<span class="str">"likeforlike"</span>,<span class="str">"like4like"</span>,<span class="str">"follow4follow"</span>,<span class="str">"followme"</span>,<span class="str">"finland"</span>,<span class="str">"winter"</span>,<span class="str">"nature"</span>,<span class="str">"travel"</span>,
+        <span class="str">"moscow"</span>,<span class="str">"saintpetersburg"</span>,<span class="str">"russia"</span>,<span class="str">"vacation"</span>,<span class="str">"happy"</span>,
+        <span class="str">"erasmus"</span>,<span class="str">"me"</span>,<span class="str">"sky"</span>,<span class="str">"iceland"</span>,<span class="str">"helsinki"</span>,<span class="str">"telaviv"</span>,
+        <span class="str">"holiday"</span>,<span class="str">"sunset"</span>,<span class="str">"tourist"</span>,<span class="str">"music"</span>,
+        <span class="str">"tbt"</span>,<span class="str">"breakfast"</span>,<span class="str">"dinner"</span>,<span class="str">"labrador"</span>,<span class="str">"sea"</span>,<span class="str">"beach"</span>,
+        <span class="str">"forrest"</span>,<span class="str">"greece"</span>,<span class="str">"italy"</span>,<span class="str">"greekgoddess"</span>]
+
+
+TAGS_RUSSIAN = [<span class="str">'Фанко'</span>, <span class="str">'фанкомания'</span>, <span class="str">'игрушки'</span>, <span class="str">'плейстейшен'</span>, <span class="str">'плейстейшн4'</span>, <span class="str">'фанкосемья'</span>, <span class="str">'игры'</span>, <span class="str">'дисней'</span>, <span class="str">'пиксар'</span>, <span class="str">'анимация'</span>, <span class="str">'Москва'</span>, <span class="str">'Санкт-Петербург'</span>, <span class="str">'СПб'</span>, <span class="str">'Россия'</span>, <span class="str">'коллекция'</span>]
+
+
+TAGS = [<span class="str">'funko'</span>,<span class="str">'toys'</span>,<span class="str">'playstation4'</span>,<span class="str">'funkocommunity'</span>, <span class="str">'xbox'</span>,<span class="str">'playstation'</span>,<span class="str">'funkopop'</span>,
+        <span class="str">'gaming'</span>,<span class="str">'disney'</span>,<span class="str">'funkofamily'</span>,<span class="str">'pixar'</span>,<span class="str">'animation'</span>,<span class="str">'xbox1'</span>,<span class="str">'funkomania'</span>,
+        <span class="str">'geek'</span>,<span class="str">'harry potter'</span> , <span class="str">'funkopops'</span>,<span class="str">'saint petersburg'</span>,<span class="str">'russia'</span>,<span class="str">'likeforlikes'</span>,<span class="str">'likeforfollow'</span>,<span class="str">'like4follow'</span>,<span class="str">'like4likes'</span>,<span class="str">'likers'</span>,<span class="str">'vscocam'</span>,
+        <span class="str">'follow'</span>,<span class="str">'following'</span>,<span class="str">'followtrain'</span>,<span class="str">'aeroflot'</span>,<span class="str">'winter'</span>,<span class="str">'instarussia'</span>,<span class="str">'vsco'</span>,<span class="str">'moscowcity'</span>,<span class="str">'russian'</span>,<span class="str">'vscorussia'</span>]
+
+COMMENTS = [<span class="str">'COOL POST!'</span>,<span class="str">'NICE'</span>,<span class="str">'LIKE'</span>,<span class="str">'Great ! '</span>,<span class="str">'Keep up the good job !'</span>,<span class="str">'I reeeaaallly like'</span>,<span class="str">'I like your instagram profile!'</span>,
+        <span class="str">'Keep up the good work !'</span>,<span class="str">'COOL!'</span>,<span class="str">'Well done ! Looking forward for your next post'</span>,
+        <span class="str">"best picture I've seen during the last ten minutes ;)"</span>,
+        <span class="str">"best picture I've seen in the last 20 seconds ;)"</span>,
+        <span class="str">"My girlfriend likes this picture"</span>,<span class="str">"I AM GROOOT"</span>,
+        <span class="str">"usually I don't comment but this time I couldn't resist ;)"</span>,
+        <span class="str">"I'm sitting on the toilet right now and your post just solved all my problems in life"</span>
+        <span class="str">'Good job ! Keep posting more'</span>,<span class="str">'Nice ! keep posting  more cool stuff !'</span>,<span class="str">"cool photo! Which camera did you use?"</span>,
+        <span class="str">'Your insta page is super impressive!'</span>,
+        <span class="str">'POP :)'</span>,<span class="str">"best picture I've seen today"</span>]
+
+COMMENTS_RUSSIAN = [<span class="str">'Классный пост!'</span>,<span class="str">'Супер, мне нравится эта фотка!'</span>,<span class="str">'Ваш инстаграм просто офигенный!!!'</span>,
+        <span class="str">'Буду ждать новый пост.'</span>,<span class="str">'На какой телефон сделана эта фотка?'</span> , <span class="str">'Очень красиво! На какой телефон вы сделали это фото?'</span>, <span class="str">'Фото просто супер! Вы сами его сделали?'</span>]
+
+statistics={<span class="str">'number_of_exceptions'</span>:<span class="dig">0</span>,<span class="str">'number_of_likes'</span>:<span class="dig">0</span>,<span class="str">'number_of_comments'</span>:<span class="dig">0</span>,<span class="str">'number_of_users_follow'</span>:<span class="dig">0</span>}
+
+<span class="kw">def</span> amountOfLikesIsLegal(amount_of_likes,max_likes):
+    <span class="kw">if</span>(amount_of_likes&gt;max_likes):
+        <span class="kw">raise</span> ValueError(<span class="str">"Number of pictures to like exceeded instagram limits"</span>)
+
+<span class="kw">def</span> refresh():
+    <span class="skw">type</span>(Key.F5)
+    <span class="skw">wait</span>(<span class="dig">3</span>)
+
+<span class="kw">def</span> get_to_page_header():
+    <span class="skw">type</span>(Key.ESC)
+    <span class="skw">wait</span>(<span class="dig">0.2</span>)
+    <span class="skw">type</span>(Key.HOME)
+    <span class="skw">wait</span>(<span class="dig">0.2</span>)
+
+<span class="kw">def</span> go_to_home_page():
+    get_to_page_header()
+    <span class="skw">click</span>(<img src="1473428851340.png" />)
+    <span class="skw">wait</span>(<img src="1473428906795.png" />)
+
+<span class="kw">def</span> open_top_posts():
+    get_to_page_header()
+    <span class="skw">click</span>(Pattern(<img src="1534193340136.png" />).targetOffset(<span class="dig">101</span>,<span class="dig">166</span>))
+
+
+<span class="kw">def</span> open_recent_posts():
+    get_to_page_header()
+    <span class="cmt">#dragDrop(Pattern("1473427655253.png").targetOffset(-2,145), Pattern("1473427816419.png").targetOffset(0,-270))</span>
+    <span class="skw">type</span>(Key.PAGE_DOWN)
+    <span class="skw">click</span>(Pattern(<img src="1498428562574.png" />).targetOffset(<span class="dig">103</span>,<span class="dig">171</span>))
+    waitVanish(<img src="1498428562574.png" />)
+
+<span class="kw">def</span> like_photo():
+    <span class="skw">click</span>(Pattern(<img src="1534193547992.png" />).targetOffset(-<span class="dig">132</span>,-<span class="dig">2</span>))
+    <span class="skw">click</span>(<img src="1498428700548.png" />)
+    waitVanish(<img src="1498428724352.png" />,<span class="dig">0.5</span>)
+
+<span class="kw">def</span> load_instagram_hash_page(hashtag):
+    get_to_page_header()
+    <span class="skw">wait</span>(Pattern(<img src="1473428958508.png" />).targetOffset(-<span class="dig">359</span>,-<span class="dig">6</span>))
+    <span class="skw">type</span>(Pattern(<img src="1473428958508.png" />).targetOffset(-<span class="dig">359</span>,-<span class="dig">6</span>), <span class="str">'#'</span> + hashtag + <span class="str">','</span>  )
+    <span class="skw">wait</span>(<img src="1473427436643.png" />,<span class="dig">2</span>)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+    <span class="skw">click</span>(Pattern(<img src="1498428426758.png" />).targetOffset(<span class="dig">17</span>,-<span class="dig">2</span>))
+    waitVanish(<img src="1473427436643.png" />)
+
+<span class="kw">def</span> post_comment():
+    text = COMMENTS[random.randint(<span class="dig">0</span>,len(COMMENTS)-<span class="dig">1</span>)]
+    <span class="kw">print</span>(text)
+    <span class="skw">type</span>(Pattern(<img src="1532725274885.png" />).targetOffset(-<span class="dig">117</span>,<span class="dig">0</span>), text)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+    <span class="skw">type</span>(Key.ENTER)
+    <span class="skw">wait</span>(<span class="dig">2</span>)
+
+<span class="kw">def</span> follow():
+    <span class="skw">click</span>(<img src="1531599113890.png" />)
+    <span class="skw">wait</span>(<span class="dig">1</span>)
+
+number_of_pictures=NUMBER_OF_CYCLES * NUMBER_OF_PICTURES_TO_LIKE_PER_TAG * len(TAGS)
+
+amountOfLikesIsLegal(number_of_pictures,INSTAGRAM_MAX_LIMIT_PER_HOUR)
+
+<span class="kw">for</span> cycle <span class="kw">in</span> range(NUMBER_OF_CYCLES):
+    refresh()
+
+    <span class="kw">for</span> tag <span class="kw">in</span> TAGS:
+        <span class="kw">print</span> tag
+        i=<span class="dig">0</span>
+        <span class="kw">try</span>:
+            load_instagram_hash_page(tag)
+            open_recent_posts()
+            <span class="cmt">#open_top_posts()</span>
+            <span class="kw">for</span> i <span class="kw">in</span> range(NUMBER_OF_PICTURES_TO_LIKE_PER_TAG):
+                <span class="kw">if</span>(<span class="kw">not</span> random.randint(<span class="dig">0</span>,<span class="dig">8</span>)):
+                    <span class="kw">print</span>(<span class="str">'comment'</span>)
+                    post_comment()
+                    statistics[<span class="str">'number_of_comments'</span>]+=<span class="dig">1</span>
+                <span class="kw">if</span>(<span class="kw">not</span> random.randint(<span class="dig">0</span>,<span class="dig">20</span>)):
+                    follow()
+                    statistics[<span class="str">'number_of_users_follow'</span>]+=<span class="dig">1</span>
+                like_photo()
+                statistics[<span class="str">'number_of_likes'</span>]+=<span class="dig">1</span>
+
+        <span class="kw">except</span>:
+            <span class="kw">print</span> <span class="str">"exception"</span>
+            statistics[<span class="str">'number_of_exceptions'</span>]+=<span class="dig">1</span>
+            <span class="kw">print</span> i
+            refresh()
+            go_to_home_page()
+
+go_to_home_page()
+<span class="kw">print</span>(<span class="str">"finished with {} exceptions."</span> .format(statistics[<span class="str">'number_of_exceptions'</span>]));
+<span class="kw">print</span>(<span class="str">"liked {} pictures."</span> .format(statistics[<span class="str">'number_of_likes'</span>]));
+<span class="kw">print</span>(<span class="str">"commented on {} pictures"</span> .format(statistics[<span class="str">'number_of_comments'</span>]));
+<span class="kw">print</span>(<span class="str">"followed {} users."</span> .format(statistics[<span class="str">'number_of_users_follow'</span>]));
+<span class="kw">print</span>(<span class="str">"maximum number of pictures {}."</span>.format(number_of_pictures))
+</pre>
+</body>
+</html>
